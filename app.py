@@ -1,10 +1,11 @@
-# This is a sample Python script.
+from flask import Flask
+from flask_restful import Api
+from controllers import TweetController
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+app = Flask(__name__)
+api = Api(app)
 
+api.add_resource(TweetController, '/tweet/<int:user_id>')
 
-def print_hi(name):
-
-
-
+if __name__ == '__main__':
+    app.run(debug=True)
