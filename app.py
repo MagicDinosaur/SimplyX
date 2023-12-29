@@ -1,11 +1,11 @@
 from flask import Flask
-from flask_restful import Api
-from controllers import TweetController
+from app.controllers import TwitterController
+from app.config import Config
 
 app = Flask(__name__)
-api = Api(app)
+app.config.from_object(Config)
 
-api.add_resource(TweetController, '/tweet/<int:user_id>')
+app.add_url_rule('/tweet/<int:user_id>', view_func=TwitterController.as_view('tweet'))
 
 if __name__ == '__main__':
     app.run(debug=True)
